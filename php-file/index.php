@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
 <?php
 
-// stocker les images dans répertoire
-$repertoiresImages = scandir ( "repertoire");
-// rechercher fichier qui commence par 'image'
-$images = preg_grep("/image/", $repertoiresImages);
-
-if (count($_FILES['fichier']['name']) > 0) {
+if (!empty($_FILES['fichier']['name']) && count($_FILES['fichier']['name']) > 0) {
 
     // boucle pour tester les images
     for ($i = 0; $i < count($_FILES['fichier']['name']); $i++) {
@@ -23,7 +9,7 @@ if (count($_FILES['fichier']['name']) > 0) {
         $tmpFilePath = $_FILES['fichier']['tmp_name'][$i];
 
         // vérifier la taille du fichier ---------------------------------------
-        if ($_FILES['img']['size'][$i]> 1000000) {
+        if ($_FILES['fichier']['size'][$i]> 1000000) {
             echo 'La taille du fichier doit être inférieur à 1 MO. ';
             break;
         }
@@ -50,6 +36,27 @@ if (count($_FILES['fichier']['name']) > 0) {
     }
 
 }
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<?php
+
+// stocker les images dans répertoire
+$repertoiresImages = scandir ( "repertoire");
+// rechercher fichier qui commence par 'image'
+$images = preg_grep("/image/", $repertoiresImages);
+
+
 
 
 ?>
